@@ -1,24 +1,24 @@
 """
-Main application entry point. Orchestrates the startup process 
-by calling the primary CLI handler function.
+Main application entry point for Bulk File Organizer.
+Orchestrates the startup process by calling the CLI handler.
 """
-import sys
 
-# Import centralized logger (no initialization logic here)
-from core.logger import initialize_logger
+import sys
+from script.cli import run_cli
 
 def main():
     """
-    Initializes and runs the core application logic.
-    Recruiter Comment: Main module remains clean; logger can be
-    initialized inside CLI or executor modules when needed.
+    Entry point for the application.
+    Recruiter Comment:
+    - Keeps orchestration clean and decoupled from CLI logic.
+    - Ready to integrate executor and config loader.
     """
-    print("Application main entry point. Logger available via core.logger.")
+    run_cli()
 
 if __name__ == "__main__":
     try:
         main()
         sys.exit(0)
     except Exception as e:
-        print(f"FATAL ERROR: Unhandled exception during application execution: {e}")
+        print(f"FATAL ERROR: Unhandled exception: {e}")
         sys.exit(1)
