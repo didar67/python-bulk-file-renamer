@@ -1,0 +1,19 @@
+# config/config.yaml
+# Recruiter Note:
+#   Central configuration file for Bulk File Organizer.
+#   Keeps constants and runtime paths in one place.
+
+app:
+  name: "Bulk File Organizer"
+  version: "1.0.0"
+  author: "Didarul Islam"
+
+paths:
+  source_dir: "./input_files"
+  destination_dir: "./organized_files"
+  log_dir: "./logs"
+
+settings:
+  dry_run: false
+  verbose: true
+  file_extensions: [".txt", ".jpg", ".png", ".pdf"]
