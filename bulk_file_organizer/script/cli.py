@@ -48,10 +48,12 @@ def run_cli():
     # Validate input path
     if not validate_folder_path(args.source):
         logger.error("Invalid source directory path provided.")
-        return
+        return args  # Return args even on error for testing
 
     logger.info("CLI arguments parsed successfully.")
     logger.info(f"Source: {args.source}, Pattern: {args.rename_pattern}, Dry-run: {args.dry_run}")
 
     # (Placeholder) Integration point for executor
     logger.info("Ready to execute bulk renaming operation...")
+
+    return args  # Return args for testing purposes
