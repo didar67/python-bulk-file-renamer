@@ -6,18 +6,15 @@ Purpose: Provides reusable helper utilities for path validation
 
 import os
 
-def validate_path(path: str) -> bool:
+def validate_folder_path(path: str) -> None:
     """
-    Validates whether the provided path exists and is a directory.
-
+    Validates the existence of a folder path.
+    
     Args:
-        path (str): The directory path to validate.
-
-    Returns:
-        bool: True if valid directory, False otherwise.
-
-    Recruiter Comment:
-    - Keeps CLI clean by offloading common logic.
-    - Future-proof for adding file existence or permission checks.
+        path (str): Folder path to validate.
+    
+    Raises:
+        FileNotFoundError: If folder does not exist.
     """
-    return os.path.exists(path) and os.path.isdir(path)
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Folder does not exist: {path}")
