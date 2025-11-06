@@ -12,7 +12,7 @@ def test_logger_initialization():
     """
     Test if logger is initialized properly and has handlers.
     """
-    logger = initialize_logger(log_file="test.log", level=logging.DEBUG)
+    logger = initialize_logger(log_file="test.log", level=logging.DEBUG, name="test_logger_init")
     assert logger is not None
     assert len(logger.handlers) > 0
 

@@ -26,11 +26,11 @@ def test_bulk_rename_dry_run(setup_dummy_folder):
     Validate dry-run mode does not rename files.
     """
     folder = setup_dummy_folder
-    renamer = BulkFileRenamer(folder_path=str(folder), prefix="test", dry_run=True)
+    renamer = BulkFileRenamer(folder_path=str(folder), pattern="test_{index}", dry_run=True)
     logger = initialize_logger(log_file="test.log", level=10)
-    
+
     result = renamer.rename_files(logger)
-    
+
     # Assert all files remain unchanged in dry-run
     assert set(os.listdir(folder)) == {"fileA.txt", "fileB.doc", "fileC.pdf"}
     assert result["renamed_count"] == 3  # Count expected
@@ -40,11 +40,11 @@ def test_bulk_rename_actual_run(setup_dummy_folder):
     Validate actual renaming occurs correctly.
     """
     folder = setup_dummy_folder
-    renamer = BulkFileRenamer(folder_path=str(folder), prefix="real", dry_run=False)
+    renamer = BulkFileRenamer(folder_path=str(folder), pattern="real_{index}", dry_run=False)
     logger = initialize_logger(log_file="test.log", level=10)
 
     result = renamer.rename_files(logger)
-    
+
     # Assert files are renamed
     renamed_files = os.listdir(folder)
     for idx, filename in enumerate(sorted(renamed_files), start=1):
@@ -56,7 +56,7 @@ def test_invalid_folder(monkeypatch):
     """
     Validate that invalid folder path raises proper logging and exception.
     """
-    renamer = BulkFileRenamer(folder_path="/invalid/path", prefix="fail", dry_run=False)
+    renamer = BulkFileRenamer(folder_path="/invalid/path", pattern="fail_{index}", dry_run=False)
     logger = initialize_logger(log_file="test.log", level=10)
 
     result = renamer.rename_files(logger)
