@@ -5,7 +5,7 @@ Purpose: Provides a professional, argparse-based command-line interface
 """
 
 import argparse
-from utils.helper import validate_path
+from utils.helper import validate_folder_path
 from core.logger import initialize_logger
 
 def run_cli():
@@ -46,7 +46,7 @@ def run_cli():
     logger = initialize_logger()
 
     # Validate input path
-    if not validate_path(args.source):
+    if not validate_folder_path(args.source):
         logger.error("Invalid source directory path provided.")
         return
 
