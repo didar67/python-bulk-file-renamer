@@ -7,6 +7,7 @@ Purpose: Provides a professional, argparse-based command-line interface
 import argparse
 from utils.helper import validate_folder_path
 from core.logger import initialize_logger
+from script.executor import BulkFileRenamer
 
 def run_cli():
     """
@@ -46,7 +47,9 @@ def run_cli():
     logger = initialize_logger()
 
     # Validate input path
-    if not validate_folder_path(args.source):
+    try:
+        validate_folder_path(args.source)
+    except FileNotFoundError:
         logger.error("Invalid source directory path provided.")
         return args  # Return args even on error for testing
 

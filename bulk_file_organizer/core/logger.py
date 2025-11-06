@@ -8,27 +8,28 @@ import logging
 from logging.handlers import RotatingFileHandler
 import os
 
-def initialize_logger(log_file: str = "bulk_file_organizer.log", level=logging.INFO):
+def initialize_logger(log_file: str = "bulk_file_organizer.log", level=logging.INFO, name: str = "BulkFileOrganizer"):
     """
     Initializes a rotating logger for the application.
-    
+
     Args:
         log_file (str): Log file path.
         level (int): Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL).
-    
+        name (str): Logger name.
+
     Returns:
         logging.Logger: Configured logger instance.
-    
+
     Recruiter Comment:
     - RotatingFileHandler prevents oversized log files.
     - if not logger.hasHandlers() ensures multiple handlers are not added.
     - Console handler included for real-time output.
     """
 
-    logger = logging.getLogger("BulkFileOrganizer")
+    logger = logging.getLogger(name)
     logger.setLevel(level)
 
-    if not logger.hasHandlers():
+    if not logger.handlers:
         # Rotating file handler (5MB per file, keep 3 backups)
         file_handler = RotatingFileHandler(
             filename=log_file,
